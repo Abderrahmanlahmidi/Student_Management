@@ -17,25 +17,46 @@ struct student_information{
     int General_note;
 };
 
+
 struct student_information list_Student[100];
 int counter = 0;
 
+
+
 void Add_a_student(){
-    printf("FirstName: \n");
+
+    printf("FirstName: ");
     scanf("%s", list_Student[counter].First_name);
-    printf("LastName: \n");
+    printf("LastName: ");
     scanf("%s", list_Student[counter].Last_name);
 
-    printf("To enter the date of birth: \n");
+    printf("To enter the date of birth: ");
     printf("enter the day: ");
     scanf("%d", &list_Student[counter].dob.day);
-    printf("enter the month: \n");
+    printf("enter the month: ");
     scanf("%s", list_Student[counter].dob.month);
-    printf("enter the Year: \n");
+    printf("enter the Year: ");
     scanf("%d", &list_Student[counter].dob.year);
 
-    printf("Department: \n");
-    scanf("%s", list_Student[counter].Department);
+    printf("Department: ");
+    printf("If you choose Informatique enter 'informatique': \n");
+    printf("If you choose Philosophy enter 'philosophy': \n");
+    printf("If you choose Etiquette enter 'etiquette': \n");
+
+    char departement_name[100];
+    scanf("%s", departement_name);
+
+    if (strcmp(departement_name, "informatique") == 0) {
+       strcpy(list_Student[counter].Department, "informatique");
+    } else if (strcmp(departement_name, "philosophy") == 0) {
+       strcpy(list_Student[counter].Department, "philosophy");
+    } else if (strcmp(departement_name, "etiquette") == 0) {
+       strcpy(list_Student[counter].Department, "etiquette");
+    } else {
+       printf("Invalid department entered.\n");
+    }
+
+
     printf("Enter Unique Number: \n");
     scanf("%d", &list_Student[counter].Unique_number);
     printf("Enter General note: \n");
@@ -43,6 +64,8 @@ void Add_a_student(){
 
     counter++;
 }
+
+
 
 void Edit(){
     int Number;
@@ -125,18 +148,33 @@ void view_information(){
    }
 }
 
-void overall_average(){
-     char department_name[50];
-
-     printf("enter department name:");
-     scanf("%s", &department_name);
+void overall_average() {
 
 
+    int somme_1 = 0, somme_2 = 0, somme_3 = 0;
+    int count_1 = 0, count_2 = 0, count_3 = 0;
 
+    for (int i = 0; i < counter; i++) {
+        if (strcmp("informatique", list_Student[i].Department) == 0) {
+            somme_1 += list_Student[i].General_note;
+            count_1++;
+        } else if (strcmp("philosophy", list_Student[i].Department) == 0) {
+            somme_2 += list_Student[i].General_note;
+            count_2++;
+        } else if (strcmp("etiquette", list_Student[i].Department) == 0) {
+            somme_3 += list_Student[i].General_note;
+            count_3++;
+        }
+    }
 
-     for(int i = 0; i < counter; i++){
-        if()
-     }
+    int moyen_1 = (count_1 != 0) ? somme_1 / count_1 : 0;
+    int moyen_2 = (count_2 != 0) ? somme_2 / count_2 : 0;
+    int moyen_3 = (count_3 != 0) ? somme_3 / count_3 : 0;
+
+    printf("Average informatique is: %d\n", moyen_1);
+    printf("Average philosophy is: %d\n", moyen_2);
+    printf("Average etiquette is: %d\n", moyen_3);
+
 
 }
 
