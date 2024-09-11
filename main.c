@@ -180,14 +180,13 @@ void overall_average() {
 
 int statistics(){
 
+
         int moyen_department_infomatique = 0;
         int moyen_department_philosophy = 0;
         int moyen_department_etiquette = 0;
         int suggested_point;
         printf("enter your suggested point:");
         scanf("%d", &suggested_point);
-
-
 
 
         for(int i = 0; i < counter; i++){
@@ -209,6 +208,7 @@ int statistics(){
         }
 
 
+
         for(int i = 0; i < counter; i++){
             if(list_Student[i].General_note > suggested_point){
                 printf("FirstName: %s", list_Student[i].First_name);
@@ -216,6 +216,19 @@ int statistics(){
                 printf("Enter General note: %s", list_Student[i].General_note);
             }
         }
+
+       for(int i = 0; i < counter - 1; i++) {
+         for(int j = i + 1; j < counter; j++) {
+           if(list_Student[i].General_note > list_Student[j].General_note) {
+            int temp = list_Student[i].General_note;
+            list_Student[i].General_note = list_Student[j].General_note;
+            list_Student[j].General_note = temp;
+        }
+    }
+}
+
+
+
 
         printf("the total number of students enrolled: %d \n", counter);
         printf("the number of students in each department: \n");
