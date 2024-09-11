@@ -17,35 +17,111 @@ struct student_information{
     int General_note;
 };
 
+struct student_information student_1;
+struct student_information list_Student[100];
+int counter = 0;
 
-void Add_a_student(struct student_information *Student){
+
+
+
+void Add_a_student(){
 
         printf("FirstName: \n");
-        scanf("%s", Student->First_name);
+        scanf("%s", list_Student[counter].First_name);
         printf("LastName: \n");
-        scanf("%s", Student->Last_name);
+        scanf("%s", list_Student[counter].Last_name);
 
         printf("To enter the date of birth: \n");
         printf("enter the day:");
-        scanf("%d", &Student->dob.day);
+        scanf("%d", &list_Student[counter].dob.day);
         printf("enter the month: \n");
-        scanf("%s", Student->dob.month);
+        scanf("%s", list_Student[counter].dob.month);
         printf("enter the Year: \n");
-        scanf("%d", &Student->dob.year);
-        printf("Department: \n");
-        scanf("%s", Student->Department);
-        printf("Enter Unique Number: \n");
-        scanf("%d", &Student->Unique_number);
+        scanf("%d", &list_Student[counter].dob.year);
 
-        printf("%d - %s - %d", Student->dob.day, Student->dob.month, Student->dob.year);
+        printf("Department: \n");
+        scanf("%s", list_Student[counter].Department);
+        printf("Enter Unique Number: \n");
+        scanf("%d", &list_Student[counter].Unique_number);
+        printf("Enter General note: \n");
+        scanf("%d", &list_Student[counter].General_note);
+
+        counter++;
+
 }
 
+void Edit(){
+    int Number;
+    printf("enter the number:");
+    scanf("%d", &Number);
+
+    for(int i = 0; i < counter; i++){
+        if(list_Student[i].Unique_number == Number){
+          printf("FirstName: \n");
+          scanf("%s", list_Student[i].First_name);
+          printf("LastName: \n");
+          scanf("%s", list_Student[i].Last_name);
+
+          printf("To enter the date of birth: \n");
+          printf("enter the day:");
+          scanf("%d", &list_Student[i].dob.day);
+          printf("enter the month: \n");
+          scanf("%s", list_Student[i].dob.month);
+          printf("enter the Year: \n");
+          scanf("%d", &list_Student[i].dob.year);
+          printf("Department: \n");
+
+          scanf("%s", list_Student[i].Department);
+
+          printf("Enter General note: \n");
+          scanf("%d", &list_Student[i].General_note);
+        }
+    }
+
+    printf("Student information has been successfully changed");
+
+}
+
+void Delete(){
+
+}
+
+
+void Edit_Delete(){
+
+    int ED_Choice;
+    printf("enter 1:Edit 2:Delete");
+    scanf("%d", &ED_Choice);
+
+     switch(ED_Choice){
+       case 1:
+        Edit();
+       break;
+       case 2:
+        Delete();
+       break;
+
+     }
+
+}
+
+void view_information(){
+
+   for(int i = 0; i < counter; i++){
+     printf("FirstName:%s \n", list_Student[i].First_name);
+     printf("LastName:%s \n", list_Student[i].Last_name);
+     printf("Date of birth:%d - %s - %d \n", list_Student[i].dob.day, list_Student[i].dob.month, list_Student[i].dob.year);
+     printf("Department:%s \n", list_Student[i].Department);
+     printf("Unique Number:%d \n", list_Student[i].Unique_number);
+
+   }
+
+}
 
 
 
 int main()
 {
-    struct student_information student_1;
 
     int choice;
 
@@ -66,13 +142,13 @@ int main()
 
       switch(choice){
         case 1:
-          Add_a_student(&student_1);
+          Add_a_student();
         break;
         case 2:
-         printf("the choice 2 \n");
+         Edit_Delete();
         break;
         case 3:
-         printf("the choice 3 \n");
+          view_information();
         break;
         case 4:
          printf("the choice 4 \n");
@@ -90,8 +166,7 @@ int main()
          printf("exit");
         break;
       }
-    }while(choice != 0);
-
+    }while(1);
 
 
 
