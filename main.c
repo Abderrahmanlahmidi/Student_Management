@@ -30,7 +30,7 @@ void Add_a_student(){
     printf("LastName: ");
     scanf("%s", list_Student[counter].Last_name);
 
-    printf("To enter the date of birth: ");
+    printf("To enter the date of birth: \n");
     printf("enter the day: ");
     scanf("%d", &list_Student[counter].dob.day);
     printf("enter the month: ");
@@ -38,7 +38,7 @@ void Add_a_student(){
     printf("enter the Year: ");
     scanf("%d", &list_Student[counter].dob.year);
 
-    printf("Department: ");
+    printf("Department: \n");
     printf("If you choose Informatique enter 'informatique': \n");
     printf("If you choose Philosophy enter 'philosophy': \n");
     printf("If you choose Etiquette enter 'etiquette': \n");
@@ -57,14 +57,13 @@ void Add_a_student(){
     }
 
 
-    printf("Enter Unique Number: \n");
+    printf("Enter Unique Number: ");
     scanf("%d", &list_Student[counter].Unique_number);
-    printf("Enter General note: \n");
+    printf("Enter General note: ");
     scanf("%d", &list_Student[counter].General_note);
 
     counter++;
 }
-
 
 
 void Edit(){
@@ -148,8 +147,8 @@ void view_information(){
    }
 }
 
-void overall_average() {
 
+void overall_average() {
 
     int somme_1 = 0, somme_2 = 0, somme_3 = 0;
     int count_1 = 0, count_2 = 0, count_3 = 0;
@@ -178,6 +177,54 @@ void overall_average() {
 
 }
 
+
+int statistics(){
+
+        int moyen_department_infomatique = 0;
+        int moyen_department_philosophy = 0;
+        int moyen_department_etiquette = 0;
+        int suggested_point;
+        printf("enter your suggested point:");
+        scanf("%d", &suggested_point);
+
+
+
+
+        for(int i = 0; i < counter; i++){
+            if(strcmp("informatique", list_Student[i].Department) == 0){
+                moyen_department_infomatique++;
+            }
+        }
+
+        for(int i = 0; i < counter; i++){
+            if(strcmp("philosophy", list_Student[i].Department) == 0){
+                moyen_department_philosophy++;
+            }
+        }
+
+        for(int i = 0; i < counter; i++){
+            if(strcmp("etiquette", list_Student[i].Department) == 0){
+                moyen_department_etiquette++;
+            }
+        }
+
+
+        for(int i = 0; i < counter; i++){
+            if(list_Student[i].General_note > suggested_point){
+                printf("FirstName: %s", list_Student[i].First_name);
+                printf("LastName: %s", list_Student[i].Last_name);
+                printf("Enter General note: %s", list_Student[i].General_note);
+            }
+        }
+
+        printf("the total number of students enrolled: %d \n", counter);
+        printf("the number of students in each department: \n");
+        printf("informatique: %d \n", moyen_department_infomatique);
+        printf("philosophy: %d \n", moyen_department_philosophy);
+        printf("etiquette: %d \n", moyen_department_etiquette);
+
+
+}
 
 
 int main(){
@@ -211,7 +258,7 @@ int main(){
                 overall_average();
                 break;
             case 5:
-                printf("Option 5 selected\n");
+                statistics();
                 break;
             case 6:
                 printf("Option 6 selected\n");
