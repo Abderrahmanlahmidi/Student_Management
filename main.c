@@ -180,13 +180,15 @@ void overall_average() {
 
 int statistics(){
 
+        int suggested_point;
+        printf("enter your suggested point:");
+        scanf("%d", &suggested_point);
+
 
         int moyen_department_infomatique = 0;
         int moyen_department_philosophy = 0;
         int moyen_department_etiquette = 0;
-        int suggested_point;
-        printf("enter your suggested point:");
-        scanf("%d", &suggested_point);
+
 
 
         for(int i = 0; i < counter; i++){
@@ -208,24 +210,30 @@ int statistics(){
         }
 
 
-
         for(int i = 0; i < counter; i++){
             if(list_Student[i].General_note > suggested_point){
-                printf("FirstName: %s", list_Student[i].First_name);
-                printf("LastName: %s", list_Student[i].Last_name);
-                printf("Enter General note: %s", list_Student[i].General_note);
+                printf("FirstName: %s \n", list_Student[i].First_name);
+                printf("LastName: %s \n", list_Student[i].Last_name);
+                printf("Enter General note: %d \n", list_Student[i].General_note);
             }
         }
 
-       for(int i = 0; i < counter - 1; i++) {
-         for(int j = i + 1; j < counter; j++) {
-           if(list_Student[i].General_note > list_Student[j].General_note) {
-            int temp = list_Student[i].General_note;
-            list_Student[i].General_note = list_Student[j].General_note;
-            list_Student[j].General_note = temp;
+
+        int notes[100];
+
+        for(int i = 0; i < counter; i++){
+            notes[i] = list_Student[i].General_note;
         }
-    }
-}
+
+        for(int i = 0; i < counter - 1; i++) {
+         for(int j = i + 1; j < counter; j++) {
+           if(notes[i] < notes[j]) {
+            int temp = notes[i];
+              notes[i] = notes[j];
+              notes[j] = temp;
+             }
+           }
+         }
 
 
 
@@ -235,6 +243,80 @@ int statistics(){
         printf("informatique: %d \n", moyen_department_infomatique);
         printf("philosophy: %d \n", moyen_department_philosophy);
         printf("etiquette: %d \n", moyen_department_etiquette);
+        printf("students with a GPA above a certain threshold: \n");
+
+        printf("the 3 students with the highest grades:  \n");
+        for(int i = 0; i < 3; i++){
+            printf("%d \n", notes[i]);
+        }
+
+        printf("the number of successful students in each department: \n");
+        for(int i = 0; i < counter; i++){
+            if(list_Student[i].General_note >= 10){
+                printf("%d \n", list_Student[i].General_note);
+            }
+        }
+
+
+}
+
+void search_student(){
+
+   char student_First_name[20];
+   char student_Last_name[20];
+   printf("Enter the student's FirstName: ");
+   scanf("%s", &student_First_name);
+   printf("Enter the student's FirstName: ");
+   scanf("%s", &student_Last_name);
+
+   for(int i = 0; i < counter; i++){
+    if(strcmp(student_First_name, list_Student[i].First_name) == 0 && strcmp(student_Last_name, list_Student[i].Last_name) == 0){
+            printf("FirstName: %s \n", list_Student[i].First_name);
+            printf("LastName: %s \n", list_Student[i].Last_name);
+            printf("Date of birth: %d - %s - %d \n", list_Student[i].dob.day, list_Student[i].dob.month, list_Student[i].dob.year);
+            printf("Department: %s \n", list_Student[i].Department);
+            printf("Unique Number: %d \n", list_Student[i].Unique_number);
+            printf("General note: %d \n", list_Student[i].General_note);
+    }
+   }
+
+}
+
+void show_list(){
+    char departement_name[20];
+    printf("Enter the departement name: ");
+    scanf("%s", &departement_name);
+    for(int i = 0; i < counter; i++){
+         if(strcmp(departement_name,list_Student[i].Department) == 0){
+            printf("FirstName: %s \n", list_Student[i].First_name);
+            printf("LastName: %s \n", list_Student[i].Last_name);
+            printf("Date of birth: %d - %s - %d \n", list_Student[i].dob.day, list_Student[i].dob.month, list_Student[i].dob.year);
+            printf("Unique Number: %d \n", list_Student[i].Unique_number);
+            printf("General note: %d \n", list_Student[i].General_note);
+         }
+    }
+
+}
+
+
+void looking_student(){
+
+  printf("Enter the number: \n");
+  printf("1.Search for a student by name\n");
+  printf("2.View the list of students enrolled in a specific department");
+
+  int looking_choice;
+  scanf("%d", &looking_choice);
+
+  switch(looking_choice){
+   case 1:
+       search_student();
+   break;
+   case 2:
+       show_list();
+   break;
+
+  }
 
 
 }
@@ -274,7 +356,7 @@ int main(){
                 statistics();
                 break;
             case 6:
-                printf("Option 6 selected\n");
+                looking_student();
                 break;
             case 7:
                 printf("Option 7 selected\n");
