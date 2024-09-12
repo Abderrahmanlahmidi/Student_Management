@@ -298,7 +298,6 @@ void show_list(){
 
 }
 
-
 void looking_student(){
 
   printf("Enter the number: \n");
@@ -317,6 +316,56 @@ void looking_student(){
    break;
 
   }
+
+}
+
+void sort_student(){
+
+    char *lastname[100];
+
+
+    for (int i = 0; i < counter; i++) {
+      lastname[i] = list_Student[i].Last_name;
+     }
+
+    for (int i = 0; i < counter - 1; i++) {
+     for (int j = i + 1; j < counter; j++) {
+        if (strcmp(lastname[i], lastname[j]) > 0) {
+            char *temp_2 = lastname[i];
+            lastname[i] = lastname[j];
+            lastname[j] = temp_2;
+        }
+      }
+     }
+
+
+    printf("Alphabetical sorting of students based on their last name:\n");
+    for (int i = 0; i < counter; i++) {
+      printf("%s\n", lastname[i]);
+    }
+
+
+    int list_notes[100];
+    printf("Sorting students by overall average, from highest to lowest or vice versa:\n");
+    for(int i = 0; i < counter; i++){
+        list_notes[i] = list_Student[i].General_note;
+    }
+
+    for (int i = 0; i < counter - 1; i++) {
+     for (int j = i + 1; j < counter; j++) {
+        if (list_notes[i] > list_notes[j]) {
+            int temp_3 = list_notes[i];
+            list_notes[i] = list_notes[j];
+            list_notes[j] = temp_3;
+        }
+      }
+     }
+
+
+    printf("Sorting students by overall average, from highest to lowest or vice versa: /n");
+    for(int i = 0; i < counter; i++){
+        printf("%d", list_notes[i]);
+    }
 
 
 }
@@ -359,7 +408,7 @@ int main(){
                 looking_student();
                 break;
             case 7:
-                printf("Option 7 selected\n");
+                sort_student();
                 break;
             case 0:
                 printf("Exiting...\n");
