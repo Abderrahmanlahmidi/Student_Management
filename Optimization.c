@@ -57,7 +57,6 @@ void add_student(){
 
    printf("Student department: %s\n", list_Student[counter].Department);
 
-
    printf("Unique number: ");
    scanf("%d", &list_Student[counter].Unique_number);
    printf("General note: ");
@@ -180,11 +179,13 @@ void view_details(){
     
 }
 
+int counter_1 = 0, counter_2 = 0, counter_3 = 0;
+
 
 void general_average() {
 
     int somme_1 = 0, somme_2 = 0, somme_3 = 0;
-    int counter_1 = 0, counter_2 = 0, counter_3 = 0;
+
 
 
     for (int i = 0; i < counter; i++) {
@@ -234,6 +235,41 @@ void general_average() {
 }
 
 
+void statistics(){
+
+
+  int threshold;
+    int Rates[20];
+    int rates_count = 0;
+
+    printf("Set the threshold: ");
+    scanf("%d", &threshold);
+
+    for (int i = 0; i < counter; i++) {
+        if (list_Student[i].General_note > threshold) {
+            Rates[rates_count] = list_Student[i].General_note;
+            rates_count++;
+        }
+    }
+
+    printf("The total number of students enrolled: %d \n", counter);
+    printf("The number of students in each department: \n");
+    printf("[1].Economy: %d\n", counter_1);
+    printf("[2].Philosophy: %d\n", counter_2);
+    printf("[3].Physics: %d\n", counter_3);
+
+
+    printf("Students with a general note higher than the threshold:\n");
+    if (rates_count > 0) {
+        for (int i = 0; i < rates_count; i++) {
+            printf("%d\n", Rates[i]);
+        }
+    } else {
+        printf("No students have a general note above the threshold.\n");
+    }
+
+}
+
 
 
 int main(){
@@ -267,7 +303,7 @@ int main(){
                 general_average();
                 break;
             case 5:
-                printf("the choice_5");
+                statistics();
                 break;
             case 6:
                 printf("the choice_6");
