@@ -36,8 +36,28 @@ void add_student(){
    printf("year:");
    scanf("%d", &list_Student[counter].dob.year);
    
-   printf("Department: ");
-   scanf("%s", &list_Student[counter].Department);
+   printf("Choose The Department: \n");
+   printf("[1]: Economy\n");
+   printf("[2]: Philosophy\n");
+   printf("[2]: Physics\n");
+
+   char department_name[30];
+   printf("Enter the department name: ");
+   scanf("%s", department_name);     
+
+   if (strcmp(department_name, "Economy") == 0) {
+       strcpy(list_Student[counter].Department, "Economy");
+   } else if (strcmp(department_name, "Philosophy") == 0) {
+       strcpy(list_Student[counter].Department, "Philosophy");
+   } else if (strcmp(department_name, "Physics") == 0) {
+       strcpy(list_Student[counter].Department, "Physics");
+   } else {
+       printf("Unknown department!\n");
+   }
+
+   printf("Student department: %s\n", list_Student[counter].Department);
+
+
    printf("Unique number: ");
    scanf("%d", &list_Student[counter].Unique_number);
    printf("General note: ");
@@ -46,7 +66,6 @@ void add_student(){
  
    counter++;
 }
-
 
 
 void edit(){
@@ -73,7 +92,6 @@ void edit(){
          scanf("%s", &list_Student[i].dob.month);
          printf("year:");
          scanf("%d", &list_Student[i].dob.year);
-         
          printf("Department: ");
          scanf("%s", &list_Student[i].Department);
          printf("Unique number: ");
@@ -120,7 +138,6 @@ void delete(){
     
 }
 
-
 void edit_delete(){
     
     int choice_2;
@@ -164,6 +181,60 @@ void view_details(){
 }
 
 
+void general_average() {
+
+    int somme_1 = 0, somme_2 = 0, somme_3 = 0;
+    int counter_1 = 0, counter_2 = 0, counter_3 = 0;
+
+
+    for (int i = 0; i < counter; i++) {
+        if (strcmp(list_Student[i].Department, "Economy") == 0) {
+            somme_1 += list_Student[i].General_note;
+            counter_1++;
+        }
+    }
+
+    for (int i = 0; i < counter; i++) {
+        if (strcmp(list_Student[i].Department, "Philosophy") == 0) {
+            somme_2 += list_Student[i].General_note;
+            counter_2++;
+        }
+    }
+
+
+    for (int i = 0; i < counter; i++) {
+        if (strcmp(list_Student[i].Department, "Physics") == 0) {
+            somme_3 += list_Student[i].General_note;
+            counter_3++;
+        }
+    }
+
+
+    if (counter_1 > 0) {
+        int economy_department_average = somme_1 / counter_1;
+        printf("Economy department average: %d \n", economy_department_average);
+    } else {
+        printf("No students in the Economy department.\n");
+    }
+
+    if (counter_2 > 0) {
+        int philosophy_department_average = somme_2 / counter_2;
+        printf("Philosophy department average: %d \n", philosophy_department_average);
+    } else {
+        printf("No students in the Philosophy department.\n");
+    }
+
+    if (counter_3 > 0) {
+        int physics_department_average = somme_3 / counter_3;
+        printf("Physics department average: %d \n", physics_department_average);
+    } else {
+        printf("No students in the Physics department.\n");
+    }
+
+}
+
+
+
 
 int main(){
     int choice_1;
@@ -193,7 +264,7 @@ int main(){
                 view_details();
                 break;
             case 4:
-                printf("the choice_4");
+                general_average();
                 break;
             case 5:
                 printf("the choice_5");
