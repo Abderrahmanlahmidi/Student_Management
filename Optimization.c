@@ -242,13 +242,14 @@ void general_average() {
 
 void statistics(){
 
-
-  int threshold;
+    int threshold;
     int Rates[20];
     int rates_count = 0;
 
+
     printf("Set the threshold: ");
     scanf("%d", &threshold);
+
 
     for (int i = 0; i < counter; i++) {
         if (list_Student[i].General_note > threshold) {
@@ -256,6 +257,7 @@ void statistics(){
             rates_count++;
         }
     }
+
 
     printf("The total number of students enrolled: %d \n", counter);
     printf("The number of students in each department: \n");
@@ -273,39 +275,88 @@ void statistics(){
         printf("No students have a general note above the threshold.\n");
     }
 
-    
-    
-    int temp_3;
 
-    for (int i = 0; i < counter; i++)
-    {
-        notes[i] = list_Student[i].General_note;
+    int temp;
+    for (int i = 0; i < counter - 1; i++) {
+        for (int j = i + 1; j < counter; j++) {
+            if (list_Student[i].General_note < list_Student[j].General_note) {
+                temp = list_Student[i].General_note;
+                list_Student[i].General_note = list_Student[j].General_note;
+                list_Student[j].General_note = temp;
+            }
+        }
     }
 
-    for(int i = 0; i < counter - 1; i++) {
-
-         for(int j = i + 1; j < counter; j++) {
-           if(notes[i] < notes[j]) {
-              temp_3 = notes[i];
-              notes[i] = notes[j];
-              notes[j] = temp_3;
-             }
-           }
-
-    }
-
-    printf("Show the 3 students with the highest grades: \n");
-
-    for (int i = 0; i < 3; i++)
-    {
-        printf("note-%d =  ", i+1);
-        printf("%d \n", notes[i]);
+    printf("Show the 3 students with the highest grades:\n");
+    for (int i = 0; i < (counter < 3 ? counter : 3); i++) {
+        printf("Note-%d = %d\n", i+1, list_Student[i].General_note);
     }
 
 
+    int Economy_Highest[50] = {0};
+    int Philosophy_Highest[50] = {0};
+    int Physics_Highest[50] = {0};
+    int econ_count = 0, phil_count = 0, phys_count = 0;
 
 
+    for (int i = 0; i < counter; i++) {
+        if (strcmp(list_Student[i].Department, "Economy") == 0) {
+            Economy_Highest[econ_count++] = list_Student[i].General_note;
+        } else if (strcmp(list_Student[i].Department, "Philosophy") == 0) {
+            Philosophy_Highest[phil_count++] = list_Student[i].General_note;
+        } else if (strcmp(list_Student[i].Department, "Physics") == 0) {
+            Physics_Highest[phys_count++] = list_Student[i].General_note;
+        }
+    }
+
+
+    for (int i = 0; i < econ_count - 1; i++) {
+        for (int j = i + 1; j < econ_count; j++) {
+            if (Economy_Highest[i] < Economy_Highest[j]) {
+                temp = Economy_Highest[i];
+                Economy_Highest[i] = Economy_Highest[j];
+                Economy_Highest[j] = temp;
+            }
+        }
+    }
+    for (int i = 0; i < phil_count - 1; i++) {
+        for (int j = i + 1; j < phil_count; j++) {
+            if (Philosophy_Highest[i] < Philosophy_Highest[j]) {
+                temp = Philosophy_Highest[i];
+                Philosophy_Highest[i] = Philosophy_Highest[j];
+                Philosophy_Highest[j] = temp;
+            }
+        }
+    }
+    for (int i = 0; i < phys_count - 1; i++) {
+        for (int j = i + 1; j < phys_count; j++) {
+            if (Physics_Highest[i] < Physics_Highest[j]) {
+                temp = Physics_Highest[i];
+                Physics_Highest[i] = Physics_Highest[j];
+                Physics_Highest[j] = temp;
+            }
+        }
+    }
+
+
+    printf("Show the top 3 students by department:\n");
+
+    printf("Economy: \n");
+    for (int i = 0; i < (econ_count < 3 ? econ_count : 3); i++) {
+        printf("Note-%d = %d\n", i+1, Economy_Highest[i]);
+    }
+
+    printf("Philosophy: \n");
+    for (int i = 0; i < (phil_count < 3 ? phil_count : 3); i++) {
+        printf("Note-%d = %d\n", i+1, Philosophy_Highest[i]);
+    }
+
+    printf("Physics: \n");
+    for (int i = 0; i < (phys_count < 3 ? phys_count : 3); i++) {
+        printf("Note-%d = %d\n", i+1, Physics_Highest[i]);
+    }
 }
+
 
 
 void looking_student(){
