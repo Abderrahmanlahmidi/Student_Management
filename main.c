@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// start code
 struct Date_of_birth{
     int day;
     char month[20];
