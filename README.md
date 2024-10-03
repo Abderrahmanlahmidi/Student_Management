@@ -52,7 +52,4 @@ You can sort students by:
 
 ### Review
 
-<video width="640" height="180" controls>
-  <source src="./Post%20-%20Feed.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Review GIF](./program_gif.gif)
